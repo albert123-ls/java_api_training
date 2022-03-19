@@ -1,4 +1,4 @@
-package fr.lernejo.fr.lernejo.navy_battle;
+package fr.lernejo.navy_battle;
 
 import com.sun.net.httpserver.HttpServer;
 
@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Handler;
 
 public class Launcher {
     public static void main(String[] args) {
