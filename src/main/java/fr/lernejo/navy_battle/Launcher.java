@@ -1,25 +1,20 @@
 package fr.lernejo.navy_battle;
 
-import com.sun.net.httpserver.HttpServer;
-
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class Launcher {
     public static void main(String[] args) {
-        int port = Integer.parseInt(args[0]);
-        HttpServer server = null;
-        ExecutorService executorService = Executors.newFixedThreadPool(1);
-        try {
-            server = HttpServer.create(new InetSocketAddress(port), 0);
-            System.out.println("server started at " + port);
-            server.createContext("/ping", new PingHandler());
-            server.setExecutor(executorService);
-            server.start();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (args.length < 1) {
+            System.out.println("Entrez un port");
+            return;
         }
+        int port = Integer.parseInt(args[0]);
+        final Map<String, String> gameInfo = new HashMap<String, String>();
+        gameInfo.put("id", UUID.randomUUID().toString());
+        gameInfo.put("port", String.valueOf(port));
+        Server server = new Server(port, gameInfo);
+        server.start();
     }
 }
